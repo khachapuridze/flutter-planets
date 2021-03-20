@@ -91,19 +91,17 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 5.0,
+            runSpacing: 10.0,
             children: [
-              SizedBox(height: 100),
               TextButton(
                 onPressed: () => changePlanet('mars'),
                 child: Text(
                   "show mars".toUpperCase(),
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
@@ -122,9 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(
                   "show pluto".toUpperCase(),
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
@@ -143,9 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(
                   "show earth".toUpperCase(),
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
