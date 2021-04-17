@@ -11,15 +11,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
@@ -65,98 +56,240 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('planets gallery'),
-      ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              SizedBox(height: 50),
-              Text(
-                planet != '' ? 'planet $planet' : 'please select planet !',
-                style: TextStyle(fontSize: 30),
-              ),
-              SizedBox(height: 50),
-              Container(
-                width: 250.0,
-                height: 250.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover, image: NetworkImage("$planetImage")),
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        appBar: AppBar(
+          title: Text('planets gallery'),
+        ),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            // tablet or bigger devices 
+            if (constraints.maxWidth > 500) {
+              return Container(
+                padding: EdgeInsets.all(40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 250.0,
+                            height: 250.0,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage("$planetImage")),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8.0)),
+                            ),
+                          ),
+                          Text(
+                            planet != ''
+                                ? 'planet $planet'
+                                : 'please select planet !',
+                            style: TextStyle(fontSize: 30),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextButton(
+                            onPressed: () => changePlanet('mars'),
+                            child: Text(
+                              "show mars".toUpperCase(),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            style: ButtonStyle(
+                                padding: MaterialStateProperty.all<EdgeInsets>(
+                                    EdgeInsets.symmetric(
+                                        vertical: 20.0, horizontal: 30.0)),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.blue[600]),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
+                                        side:
+                                            BorderSide(color: Colors.blue[800])))),
+                          ),
+                          TextButton(
+                            onPressed: () => changePlanet('pluto'),
+                            child: Text(
+                              "show pluto".toUpperCase(),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            style: ButtonStyle(
+                                padding: MaterialStateProperty.all<EdgeInsets>(
+                                    EdgeInsets.symmetric(
+                                        vertical: 20.0, horizontal: 30.0)),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.blue[600]),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
+                                        side:
+                                            BorderSide(color: Colors.blue[800])))),
+                          ),
+                          TextButton(
+                            onPressed: () => changePlanet('earth'),
+                            child: Text(
+                              "show earth".toUpperCase(),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            style: ButtonStyle(
+                                padding: MaterialStateProperty.all<EdgeInsets>(
+                                    EdgeInsets.symmetric(
+                                        vertical: 20.0, horizontal: 30.0)),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.blue[600]),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
+                                        side:
+                                            BorderSide(color: Colors.blue[800])))),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-              ),
-            ],
-          ),
-          Wrap(
-            direction: Axis.horizontal,
-            spacing: 5.0,
-            runSpacing: 10.0,
-            children: [
-              TextButton(
-                onPressed: () => changePlanet('mars'),
-                child: Text(
-                  "show mars".toUpperCase(),
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+              );
+            } 
+             // smaller devices - for mobile
+            else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(height: 50),
+                        Text(
+                          planet != ''
+                              ? 'planet $planet'
+                              : 'please select planet !',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                        SizedBox(height: 50),
+                        Container(
+                          width: 250.0,
+                          height: 250.0,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage("$planetImage")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 5.0,
+                      runSpacing: 10.0,
+                      children: [
+                        TextButton(
+                          onPressed: () => changePlanet('mars'),
+                          child: Text(
+                            "show mars".toUpperCase(),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          style: ButtonStyle(
+                              padding: MaterialStateProperty.all<EdgeInsets>(
+                                  EdgeInsets.symmetric(
+                                      vertical: 20.0, horizontal: 30.0)),
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue[600]),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(
+                                          color: Colors.blue[800])))),
+                        ),
+                        TextButton(
+                          onPressed: () => changePlanet('pluto'),
+                          child: Text(
+                            "show pluto".toUpperCase(),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          style: ButtonStyle(
+                              padding: MaterialStateProperty.all<EdgeInsets>(
+                                  EdgeInsets.symmetric(
+                                      vertical: 20.0, horizontal: 30.0)),
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue[600]),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(
+                                          color: Colors.blue[800])))),
+                        ),
+                        TextButton(
+                          onPressed: () => changePlanet('earth'),
+                          child: Text(
+                            "show earth".toUpperCase(),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          style: ButtonStyle(
+                              padding: MaterialStateProperty.all<EdgeInsets>(
+                                  EdgeInsets.symmetric(
+                                      vertical: 20.0, horizontal: 30.0)),
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue[600]),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(
+                                          color: Colors.blue[800])))),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-                style: ButtonStyle(
-                    padding: MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0)),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.blue[600]),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.blue[800])))),
-              ),
-              TextButton(
-                onPressed: () => changePlanet('pluto'),
-                child: Text(
-                  "show pluto".toUpperCase(),
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                style: ButtonStyle(
-                    padding: MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0)),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.blue[600]),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.blue[800])))),
-              ),
-              TextButton(
-                onPressed: () => changePlanet('earth'),
-                child: Text(
-                  "show earth".toUpperCase(),
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                style: ButtonStyle(
-                    padding: MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0)),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.blue[600]),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.blue[800])))),
-              ),
-            ],
-          )
-        ],
-      )),
-    );
+              );
+            }
+          },
+        ));
   }
 }
